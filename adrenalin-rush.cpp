@@ -1,9 +1,9 @@
 // adrenalin-rush.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "base.h"
-#include "tank.h"
-#include "player.h"
+#include "engine/base.h"
+#include "engine/tank.h"
+#include "engine/player.h"
 #include <vector>
 
 
