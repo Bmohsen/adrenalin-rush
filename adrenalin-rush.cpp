@@ -6,7 +6,7 @@
 #include "engine/player.h"
 #include <vector>
 
-
+using namespace Engine;
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 900;
 
@@ -39,7 +39,6 @@ void game_loop() {
         player->updateControl(dt);
         BeginDrawing();
         ClearBackground(WHITE);
-        DrawText("Run, Run, you little shit...", 0, 0, 20, BLACK);
         player->draw();
         EndDrawing();
     }

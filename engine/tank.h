@@ -2,88 +2,104 @@
 
 #include <string>
 #include "raylib.h"  // For Vector2, Texture2D, LoadTexture, etc.
+#include <vector>
 
-enum class TankClass {
-    LIGHT,
-    MEDIUM,
-    HEAVY,
-};
+namespace Engine {
 
-enum class AmmoType {
-    ANTI_TANK,
-    EXPLOSIVE,
-    INCENDIARY,
-};
+	enum class TankClass {
+		LIGHT,
+		MEDIUM,
+		HEAVY,
+	};
 
-enum class TankRole {
-    FIGHTER,
-    DESTROYER,
-};
+	enum class AmmoType {
+		ANTI_TANK,
+		EXPLOSIVE,
+		INCENDIARY,
+	};
 
-struct Tank {
-    std::string name;
-    std::string base_img;
-};
+	enum class TankRole {
+		FIGHTER,
+		DESTROYER,
+	};
 
-// Base class for tanks
-class BaseTank {
-public:
-    BaseTank() = default;
-    virtual ~BaseTank();
-    virtual void updateControl(float dt) = 0;
-    virtual void attack() = 0;
-    // Spawn the tank at given position with a name (default: "t34")
-    void spawn(float xPos, float yPos);
-    void loadTexture(const std::string& tank_name = "m6");
-    void draw();
+	struct Tank {
+		std::string name;
+		std::string base_img;
+	};
 
-    // Getters (optional, could add setters if needed)
-    const std::string& getName() const { return name; }
-    TankClass getTankClass() const { return tank_class; }
-    AmmoType getAmmoType() const { return ammo_type; }
-    TankRole getTankRole() const { return tank_role; }
-    std::string name;
+	// Base class for tanks
+	class BaseTank {
+	public:
+		BaseTank();
+		virtual ~BaseTank();
+		virtual void updateControl(float dt);
+		virtual void attack() = 0;
+		// Spawn the tank at given position with a name (default: "t34")
+		void spawn(float xPos, float yPos);
+		void loadTexture(const std::string& tank_name = "m6");
+		// optional, in future different tank classes (light, meduim and heavy) may have different animation
+		virtual void loadFireAnimation();
+		void updateFireAnimation(float dt);
+		void draw();
 
-    TankClass tank_class = TankClass::LIGHT;
-    AmmoType ammo_type = AmmoType::EXPLOSIVE;
-    TankRole tank_role = TankRole::FIGHTER;
-    int current_ammo = 5;
-    int health = 100;
-    float movement_speed = 100.0f; // pixels/sec
-    float rotation = 180.0f;         // body rotation
-    float turretRotation = 180.0f;   // turret rotation
-    float rotation_speed = 90.0f;  // degrees/sec
-    int damage = 12;
-    int range = 12;
-    int defence = 15;
-    int reload_time = 3;
-    int level = 1;
-    int kills = 0;
+		// Getters (optional, could add setters if needed)
+		const std::string& getName() const { return name; }
+		TankClass getTankClass() const { return tank_class; }
+		AmmoType getAmmoType() const { return ammo_type; }
+		TankRole getTankRole() const { return tank_role; }
+		std::string name;
 
-    Vector2 position{ 0, 0 };
-    Texture2D texture{};
-    Rectangle bodyRect{};
-    Rectangle turretRect{};
-};
+		TankClass tank_class = TankClass::LIGHT;
+		AmmoType ammo_type = AmmoType::EXPLOSIVE;
+		TankRole tank_role = TankRole::FIGHTER;
+		int current_ammo = 5;
+		int health = 100;
+		float movement_speed = 100.0f; // pixels/sec
+		float rotation = 180.0f;         // body rotation
+		float turretRotation = 180.0f;   // turret rotation
+		float rotation_speed = 90.0f;  // degrees/sec
+		int damage = 12;
+		int range = 12;
+		int defence = 15;
+		int reload_time = 3;
+		int level = 1;
+		int kills = 0;
 
-// Derived tank classes
-class LightTank : public BaseTank {
-public:
-    LightTank();
-    void attack() override;
-    void updateControl(float dt) override;
-};
+		Vector2 position{ 0, 0 };
+		Texture2D texture{};
+		Rectangle bodyRect{};
+		Rectangle turretRect{};
+		std::vector<Texture2D> fireFrames;
+		Vector2 fireOffset{ 0, -30 };
+		int fireFrameCount = 0;
+		float fireFrameTime = 0.0f;  // 50ms per frame (20 FPS animation)
+		float fireTimer = 0.0f;       // start at 0 so it counts up
+		int currentFireFrame = 0;
+		bool isFiring = false;
+		Sound tankFireSound{};
 
-class MediumTank : public BaseTank {
-public:
-    MediumTank();
-    void attack() override;
-    void updateControl(float dt) override;
-};
+	};
 
-class HeavyTank : public BaseTank {
-public:
-    HeavyTank();
-    void attack() override;
-    void updateControl(float dt) override;
-};
+	// Derived tank classes
+	class LightTank : public BaseTank {
+	public:
+		LightTank();
+		void updateControl(float dt) override; // optional
+		void attack() override;
+	};
+
+	class MediumTank : public BaseTank {
+	public:
+		MediumTank();
+		void updateControl(float dt) override; // optional
+		void attack() override;
+	};
+
+	class HeavyTank : public BaseTank {
+	public:
+		HeavyTank();
+		void updateControl(float dt) override; // optional
+		void attack() override;
+	};
+}
