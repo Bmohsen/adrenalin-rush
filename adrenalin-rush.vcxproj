@@ -128,7 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="adrenalin-rush.cpp" />
+    <ClCompile Include="ai.cpp" />
     <ClCompile Include="level_manager.cpp" />
+    <ClCompile Include="player.cpp" />
     <ClCompile Include="tank.cpp" />
     <ClCompile Include="tower.cpp" />
     <ClCompile Include="utils.cpp" />
@@ -138,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="tank.h" />
   </ItemGroup>

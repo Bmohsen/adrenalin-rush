@@ -38,10 +38,7 @@ void BaseTank::draw() {
         WHITE
     );
 
-    // Turret rotation toward mouse
-    Vector2 mousePos = GetMousePosition();
-    float turretRotation = atan2(mousePos.y - position.y, mousePos.x - position.x) * RAD2DEG;
-
+ 
     DrawTexturePro(
         texture,
         turretRect,
@@ -68,9 +65,17 @@ void BaseTank::movement() {
         position.y -= cosf(DEG2RAD * rotation) * movement_speed * dt;
     }
 
-    // Turret rotation with mouse
-    Vector2 mouse = GetMousePosition();
-    turretRotation = atan2f(mouse.y - position.y, mouse.x - position.x) * RAD2DEG;
+    // Turret rotation controlled by Q and E keys
+    if (IsKeyDown(KEY_Q)) {
+        turretRotation -= rotation_speed * dt;  // rotate turret left
+    }
+    if (IsKeyDown(KEY_E)) {
+        turretRotation += rotation_speed * dt;  // rotate turret right
+    }
+
+    // Optional: clamp turretRotation between 0-360 degrees for neatness
+    if (turretRotation < 0) turretRotation += 360;
+    if (turretRotation >= 360) turretRotation -= 360;
 }
 
 // -------- LightTank --------
@@ -82,7 +87,7 @@ LightTank::LightTank() {
 
     current_ammo = 15;
     health = 60;
-    movement_speed = 30;
+    movement_speed = 160;
     damage = 10;
     range = 15;
     defence = 10;
