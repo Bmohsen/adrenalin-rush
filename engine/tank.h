@@ -31,11 +31,11 @@ public:
     BaseTank() = default;
     virtual ~BaseTank();
     virtual void updateControl(float dt) = 0;
+    virtual void attack() = 0;
     // Spawn the tank at given position with a name (default: "t34")
     void spawn(float xPos, float yPos);
     void loadTexture(const std::string& tank_name = "m6");
     void draw();
-    virtual void attack() = 0;
 
     // Getters (optional, could add setters if needed)
     const std::string& getName() const { return name; }
@@ -50,8 +50,8 @@ public:
     int current_ammo = 5;
     int health = 100;
     float movement_speed = 100.0f; // pixels/sec
-    float rotation = 0.0f;         // body rotation
-    float turretRotation = 0.0f;   // turret rotation
+    float rotation = 180.0f;         // body rotation
+    float turretRotation = 180.0f;   // turret rotation
     float rotation_speed = 90.0f;  // degrees/sec
     int damage = 12;
     int range = 12;
@@ -71,16 +71,19 @@ class LightTank : public BaseTank {
 public:
     LightTank();
     void attack() override;
+    void updateControl(float dt) override;
 };
 
 class MediumTank : public BaseTank {
 public:
     MediumTank();
     void attack() override;
+    void updateControl(float dt) override;
 };
 
 class HeavyTank : public BaseTank {
 public:
     HeavyTank();
     void attack() override;
+    void updateControl(float dt) override;
 };

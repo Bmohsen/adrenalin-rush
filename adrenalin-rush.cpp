@@ -13,7 +13,7 @@ const int SCREEN_HEIGHT = 900;
 
 void game_loop();
 void login_screen();
-void init_skrimish_world();
+void init_basics();
 
 std::vector<BaseTank*> tanks;
 Player* playerTank = nullptr;
@@ -26,27 +26,31 @@ int main()
 
 void game_loop() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "AD Rush");
+    init_basics();
     // set fps to 60
     SetTargetFPS(60);
-    playerTank = new Player();
+    BaseTank* lightTank = new LightTank();
     // init tank state 
-   
+    lightTank->loadTexture("m6");
+    lightTank->spawn(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.7);
+    Player* player = new Player(lightTank);
     while (!WindowShouldClose()) {
-     
-    
+        float dt = GetFrameTime();
+        player->updateControl(dt);
         BeginDrawing();
         ClearBackground(WHITE);
         DrawText("Run, Run, you little shit...", 0, 0, 20, BLACK);
-   
+        player->draw();
         EndDrawing();
     }
     // Cleanup tanks and textures
-    for (auto tank : tanks) {
-        delete tank;
-    }
-    tanks.clear();
+    delete player;
     CloseWindow();
 }
 
 
 void login_screen(){}
+
+void init_basics() {
+    InitAudioDevice();
+}

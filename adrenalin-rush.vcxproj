@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="adrenalin-rush.cpp" />
-    <ClCompile Include="engine\ai.cpp" />
     <ClCompile Include="engine\level_manager.cpp" />
     <ClCompile Include="engine\player.cpp" />
     <ClCompile Include="engine\tank.cpp" />
@@ -139,7 +138,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\ai.h" />
     <ClInclude Include="engine\base.h" />
     <ClInclude Include="missions\mission.h" />
     <ClInclude Include="engine\player.h" />

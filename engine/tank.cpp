@@ -11,7 +11,7 @@ BaseTank::~BaseTank() {
 
 void BaseTank::spawn(float xPos, float yPos) {
     position = { xPos, yPos };
-    DrawTexture(texture, (int)position.x, (int)position.y, WHITE);
+    DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
 }
 
 void BaseTank::loadTexture(const std::string& tank_name) {
@@ -71,6 +71,7 @@ void LightTank::attack() {
     // Implement LightTank specific attack behavior here
 }
 
+void LightTank::updateControl(float dt){}
 
 
 // -------- MediumTank --------
@@ -93,7 +94,7 @@ MediumTank::MediumTank() {
 void MediumTank::attack() {
     // Implement MediumTank specific attack behavior here
 }
-
+void MediumTank::updateControl(float dt) {}
 
 // -------- HeavyTank --------
 HeavyTank::HeavyTank() {
@@ -116,3 +117,4 @@ void HeavyTank::attack() {
     // Implement HeavyTank specific attack behavior here
 }
 
+void HeavyTank::updateControl(float dt) {}
