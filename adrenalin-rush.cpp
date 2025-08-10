@@ -3,6 +3,7 @@
 
 #include "base.h"
 #include "tank.h"
+#include "player.h"
 #include <vector>
 
 
@@ -15,7 +16,7 @@ void login_screen();
 void init_skrimish_world();
 
 std::vector<BaseTank*> tanks;
-LightTank t34;
+Player* playerTank = nullptr;
 
 int main()
 {
@@ -26,18 +27,17 @@ int main()
 void game_loop() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "AD Rush");
     // set fps to 60
-    //SetTargetFPS(0);
-
-    //init_skrimish_world();
-    t34.loadTexture();
-    t34.spawn(100, 100);
+    SetTargetFPS(60);
+    playerTank = new Player();
+    // init tank state 
+   
     while (!WindowShouldClose()) {
-        t34.movement();
+     
     
         BeginDrawing();
         ClearBackground(WHITE);
         DrawText("Run, Run, you little shit...", 0, 0, 20, BLACK);
-        t34.draw();
+   
         EndDrawing();
     }
     // Cleanup tanks and textures
@@ -46,19 +46,6 @@ void game_loop() {
     }
     tanks.clear();
     CloseWindow();
-}
-
-void init_skrimish_world() {
-    // Clear existing tanks if any
-    for (auto tank : tanks) delete tank;
-    tanks.clear();
-
-    // Create tanks dynamically and add to vector
-    tanks.push_back(new LightTank());
-    tanks.back()->spawn(100, 100);
-
-    tanks.push_back(new MediumTank());
-    tanks.back()->spawn(300, 200);
 }
 
 

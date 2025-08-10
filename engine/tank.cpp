@@ -11,7 +11,7 @@ BaseTank::~BaseTank() {
 
 void BaseTank::spawn(float xPos, float yPos) {
     position = { xPos, yPos };
-    DrawTexture(texture, position.x, position.y, WHITE);
+    DrawTexture(texture, (int)position.x, (int)position.y, WHITE);
 }
 
 void BaseTank::loadTexture(const std::string& tank_name) {
@@ -49,34 +49,6 @@ void BaseTank::draw() {
     );
 }
 
-
-void BaseTank::movement() {
-    float dt = GetFrameTime();
-
-    if (IsKeyDown(KEY_RIGHT)) rotation += rotation_speed * dt;
-    if (IsKeyDown(KEY_LEFT))  rotation -= rotation_speed * dt;
-
-    if (IsKeyDown(KEY_UP)) {
-        position.x -= sinf(DEG2RAD * rotation) * movement_speed * dt;
-        position.y += cosf(DEG2RAD * rotation) * movement_speed * dt;
-    }
-    if (IsKeyDown(KEY_DOWN)) {
-        position.x += sinf(DEG2RAD * rotation) * movement_speed * dt;
-        position.y -= cosf(DEG2RAD * rotation) * movement_speed * dt;
-    }
-
-    // Turret rotation controlled by Q and E keys
-    if (IsKeyDown(KEY_Q)) {
-        turretRotation -= rotation_speed * dt;  // rotate turret left
-    }
-    if (IsKeyDown(KEY_E)) {
-        turretRotation += rotation_speed * dt;  // rotate turret right
-    }
-
-    // Optional: clamp turretRotation between 0-360 degrees for neatness
-    if (turretRotation < 0) turretRotation += 360;
-    if (turretRotation >= 360) turretRotation -= 360;
-}
 
 // -------- LightTank --------
 LightTank::LightTank() {

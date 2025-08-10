@@ -128,21 +128,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="adrenalin-rush.cpp" />
-    <ClCompile Include="ai.cpp" />
-    <ClCompile Include="level_manager.cpp" />
-    <ClCompile Include="player.cpp" />
-    <ClCompile Include="tank.cpp" />
-    <ClCompile Include="tower.cpp" />
-    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="engine\ai.cpp" />
+    <ClCompile Include="engine\level_manager.cpp" />
+    <ClCompile Include="engine\player.cpp" />
+    <ClCompile Include="engine\tank.cpp" />
+    <ClCompile Include="engine\tower.cpp" />
+    <ClCompile Include="engine\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="engine\ai.h" />
+    <ClInclude Include="engine\base.h" />
+    <ClInclude Include="missions\mission.h" />
+    <ClInclude Include="engine\player.h" />
     <ClInclude Include="resource1.h" />
-    <ClInclude Include="tank.h" />
+    <ClInclude Include="engine\tank.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="adrenalin-rush1.rc" />
