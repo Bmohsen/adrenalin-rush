@@ -11,7 +11,9 @@ BaseTank::~BaseTank() {
 
 void BaseTank::spawn(float xPos, float yPos) {
     position = { xPos, yPos };
+    DrawTexture(texture, position.x, position.y, WHITE);
 }
+
 void BaseTank::loadTexture(const std::string& tank_name) {
     name = tank_name;
     if (texture.id == 0) {
@@ -23,7 +25,7 @@ void BaseTank::loadTexture(const std::string& tank_name) {
         bodyRect = { 0, 0, (float)halfWidth, (float)height };
         turretRect = { (float)halfWidth, 0, (float)halfWidth, (float)height };
     }
-}
+    }
 
 void BaseTank::draw() {
     // Draw tank body
@@ -136,3 +138,4 @@ HeavyTank::HeavyTank() {
 void HeavyTank::attack() {
     // Implement HeavyTank specific attack behavior here
 }
+

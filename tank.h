@@ -31,12 +31,18 @@ public:
     BaseTank() = default;
     virtual ~BaseTank();
 
+    // Spawn the tank at given position with a name (default: "t34")
     void spawn(float xPos, float yPos);
     void loadTexture(const std::string& tank_name = "m6");
     void draw();
     virtual void attack() = 0;
     void movement();
 
+    // Getters (optional, could add setters if needed)
+    const std::string& getName() const { return name; }
+    TankClass getTankClass() const { return tank_class; }
+    AmmoType getAmmoType() const { return ammo_type; }
+    TankRole getTankRole() const { return tank_role; }
     std::string name;
     TankClass tank_class = TankClass::LIGHT;
     AmmoType ammo_type = AmmoType::EXPLOSIVE;

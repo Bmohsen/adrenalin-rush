@@ -12,7 +12,9 @@ const int SCREEN_HEIGHT = 900;
 
 void game_loop();
 void login_screen();
+void init_skrimish_world();
 
+std::vector<BaseTank*> tanks;
 LightTank t34;
 
 int main()
@@ -38,9 +40,26 @@ void game_loop() {
         t34.draw();
         EndDrawing();
     }
+    // Cleanup tanks and textures
+    for (auto tank : tanks) {
+        delete tank;
+    }
+    tanks.clear();
     CloseWindow();
 }
 
+void init_skrimish_world() {
+    // Clear existing tanks if any
+    for (auto tank : tanks) delete tank;
+    tanks.clear();
+
+    // Create tanks dynamically and add to vector
+    tanks.push_back(new LightTank());
+    tanks.back()->spawn(100, 100);
+
+    tanks.push_back(new MediumTank());
+    tanks.back()->spawn(300, 200);
+}
 
 
 void login_screen(){}
