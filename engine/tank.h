@@ -79,6 +79,7 @@ namespace Engine {
 		float fireTimer = 0.0f;       // start at 0 so it counts up
 		int currentFireFrame = 0;
 		bool isFiring = false;
+		bool isDestroyed = false;
 		Sound tankFireSound{};
 
 	};

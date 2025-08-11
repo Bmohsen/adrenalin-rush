@@ -128,12 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="adrenalin-rush.cpp" />
-    <ClCompile Include="engine\level_manager.cpp" />
+    <ClCompile Include="engine\LevelManager.cpp" />
     <ClCompile Include="engine\player.cpp" />
     <ClCompile Include="engine\tank.cpp" />
     <ClCompile Include="engine\tank_tire_system.cpp" />
     <ClCompile Include="engine\tower.cpp" />
     <ClCompile Include="engine\utils.cpp" />
+    <ClCompile Include="engine\world_generator.cpp" />
+    <ClCompile Include="engine\WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -141,9 +143,11 @@
   <ItemGroup>
     <ClInclude Include="engine\base.h" />
     <ClInclude Include="missions\mission.h" />
-    <ClInclude Include="engine\player.h" />
+    <ClInclude Include="engine\Player.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="engine\tank.h" />
+    <ClInclude Include="engine\world_generator.h" />
+    <ClInclude Include="engine\WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="adrenalin-rush1.rc" />

@@ -27,7 +27,7 @@
     <ClCompile Include="engine\tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\level_manager.cpp">
+    <ClCompile Include="engine\LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\utils.cpp">
@@ -37,6 +37,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\tank_tire_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\world_generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\WorldMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,10 +59,16 @@
     <ClInclude Include="engine\tank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\player.h">
+    <ClInclude Include="engine\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="missions\mission.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\world_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\WorldMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
