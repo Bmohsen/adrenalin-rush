@@ -28,14 +28,13 @@ namespace Engine {
 		std::string base_img;
 	};
 
-	// Base class for tanks
+	/* ----------------------------------  Base Tank defination  ---------------------------------- */
 	class BaseTank {
 	public:
 		BaseTank();
 		virtual ~BaseTank();
 		virtual void updateControl(float dt);
 		virtual void attack() = 0;
-		// Spawn the tank at given position with a name (default: "t34")
 		void spawn(float xPos, float yPos);
 		void loadTexture(const std::string& tank_name = "m6");
 		// optional, in future different tank classes (light, meduim and heavy) may have different animation
@@ -43,7 +42,6 @@ namespace Engine {
 		void updateFireAnimation(float dt);
 		void draw();
 
-		// Getters (optional, could add setters if needed)
 		const std::string& getName() const { return name; }
 		TankClass getTankClass() const { return tank_class; }
 		AmmoType getAmmoType() const { return ammo_type; }
@@ -55,10 +53,10 @@ namespace Engine {
 		TankRole tank_role = TankRole::FIGHTER;
 		int current_ammo = 5;
 		int health = 100;
-		float movement_speed = 100.0f; // pixels/sec
-		float rotation = 180.0f;         // body rotation
-		float turretRotation = 180.0f;   // turret rotation
-		float rotation_speed = 90.0f;  // degrees/sec
+		float movement_speed = 100.0f;
+		float rotation = 180.0f;         
+		float turretRotation = 180.0f;   
+		float rotation_speed = 90.0f;  
 		int damage = 12;
 		int range = 400;
 		int defence = 15;
