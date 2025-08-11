@@ -3,7 +3,7 @@
 #include <raylib.h>
 
 namespace Engine {
-
+	/* ----------------------------------  Base Tank   ---------------------------------- */
 	BaseTank::BaseTank() {
 		// load turret shout
 		std::string soundPath = get_asset("tank-shot", AssetType::SOUND);
@@ -65,7 +65,7 @@ namespace Engine {
 		//DrawText(TextFormat("Firing frame: %d/%d", currentFireFrame, fireFrameCount), 10, 10, 20, RED);
 		//DrawText(TextFormat("Firing: %d/%d", isFiring, fireFrameCount), 30, 30, 20, RED);
 
-		// Draw tank body
+		/* ----------------------------------  Tank Body and Turret Drawing  ---------------------------------- */
 		DrawTexturePro(
 			texture,
 			bodyRect,
@@ -82,7 +82,7 @@ namespace Engine {
 			turretRotation,
 			WHITE
 		);
-		// Draw fire animation if firing
+		/* ----------------------------------  Turret Shot Animation  ---------------------------------- */
 		if (isFiring && currentFireFrame < fireFrameCount) {
 			Texture2D& fireTex = fireFrames[currentFireFrame];
 			// Calculate position in front of turret, considering turret rotation
@@ -101,10 +101,28 @@ namespace Engine {
 			Vector2 origin = { fireTex.width / 2.0f, fireTex.height + 150.0f };
 			DrawTexturePro(fireTex, sourceRec, destRec, origin, turretRotation + 180.0f, WHITE);
 		}
+		/* ----------------------------------  Tank Range Indicator  ---------------------------------- */
+		Color rangeColor = Color{ 255, 0, 0, 50 }; // Red, transparent
+		DrawCircleLines((int)position.x, (int)position.y, (float)range , rangeColor);
+
+		// Calculate range dot using turret logic
+		float rad = DEG2RAD * turretRotation;
+		Vector2 rangeOffset = {
+			0.0f * cosf(rad) - (range) * sinf(rad),  // X offset
+			0.0f * sinf(rad) + (range) * cosf(rad)   // Y offset
+		};
+
+		// Position of the dot at max range
+		Vector2 rangeDot = {
+			position.x + rangeOffset.x,
+			position.y + rangeOffset.y
+		};
+
+		DrawCircleV(rangeDot, 4.0f, RED);
 	}
 
 
-	// -------- LightTank --------
+	/* ----------------------------------  LightTank  ---------------------------------- */
 	LightTank::LightTank() {
 		name = "Light Tank";
 		tank_class = TankClass::LIGHT;
@@ -114,7 +132,7 @@ namespace Engine {
 		health = 60;
 		movement_speed = 160;
 		damage = 10;
-		range = 15;
+		range = 800;
 		defence = 10;
 		reload_time = 3;
 		level = 1;
@@ -132,7 +150,7 @@ namespace Engine {
 		}
 	}
 
-	// -------- MediumTank --------
+	/* ----------------------------------  Meduim Tank  ---------------------------------- */
 	MediumTank::MediumTank() {
 		name = "Medium Tank";
 		tank_class = TankClass::MEDIUM;
@@ -143,7 +161,7 @@ namespace Engine {
 		health = 80;
 		movement_speed = 8;
 		damage = 21;
-		range = 18;
+		range = 220;
 		defence = 20;
 		reload_time = 4;
 		level = 1;
@@ -161,7 +179,7 @@ namespace Engine {
 	}
 
 
-	// -------- HeavyTank --------
+	/* ----------------------------------  Heavy Tank  ---------------------------------- */
 	HeavyTank::HeavyTank() {
 		name = "Heavy Tank";
 		tank_class = TankClass::HEAVY;
@@ -171,7 +189,7 @@ namespace Engine {
 		health = 120;
 		movement_speed = 4;
 		damage = 32;
-		range = 25;
+		range = 250;
 		defence = 35;
 		reload_time = 5;
 		level = 1;

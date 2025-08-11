@@ -5,7 +5,6 @@
 #include <vector>
 
 namespace Engine {
-
 	enum class AssetType {
 		IMAGE,
 		SOUND

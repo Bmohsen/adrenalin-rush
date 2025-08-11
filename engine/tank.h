@@ -60,13 +60,14 @@ namespace Engine {
 		float turretRotation = 180.0f;   // turret rotation
 		float rotation_speed = 90.0f;  // degrees/sec
 		int damage = 12;
-		int range = 12;
+		int range = 400;
 		int defence = 15;
 		int reload_time = 3;
 		int level = 1;
 		int kills = 0;
 
 		Vector2 position{ 0, 0 };
+		Vector2 turret_target_position{ 0, 0 };
 		Texture2D texture{};
 		Rectangle bodyRect{};
 		Rectangle turretRect{};
