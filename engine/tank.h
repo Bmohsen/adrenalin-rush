@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include "raylib.h"  // For Vector2, Texture2D, LoadTexture, etc.
+#include "base.h" 
+#include "tank_tire_system.h"
 #include <vector>
 
 namespace Engine {
@@ -27,6 +28,7 @@ namespace Engine {
 		std::string name;
 		std::string base_img;
 	};
+
 
 	/* ----------------------------------  Base Tank defination  ---------------------------------- */
 	class BaseTank {
@@ -54,9 +56,9 @@ namespace Engine {
 		int current_ammo = 5;
 		int health = 100;
 		float movement_speed = 100.0f;
-		float rotation = 180.0f;         
-		float turretRotation = 180.0f;   
-		float rotation_speed = 90.0f;  
+		float rotation = 180.0f;
+		float turretRotation = 180.0f;
+		float rotation_speed = 90.0f;
 		int damage = 12;
 		int range = 400;
 		int defence = 15;
@@ -64,6 +66,7 @@ namespace Engine {
 		int level = 1;
 		int kills = 0;
 
+		TankTireSystem trackSystem;
 		Vector2 position{ 0, 0 };
 		Vector2 turret_target_position{ 0, 0 };
 		Texture2D texture{};

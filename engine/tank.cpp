@@ -2,7 +2,14 @@
 #include "tank.h"
 #include <raylib.h>
 
+
 namespace Engine {
+	// simple distance function
+	static inline float Vec2Distance(const Vector2& a, const Vector2& b) {
+		float dx = a.x - b.x;
+		float dy = a.y - b.y;
+		return sqrtf(dx * dx + dy * dy);
+	};
 	/* ----------------------------------  Base Tank   ---------------------------------- */
 	BaseTank::BaseTank() {
 		// load turret shout
@@ -14,17 +21,20 @@ namespace Engine {
 	BaseTank::~BaseTank() {
 		UnloadTexture(texture);
 		UnloadSound(tankFireSound);
+		UnloadTexture(trackSystem.trackTexture);
 	}
 
 	void BaseTank::updateControl(float dt) {
 		updateFireAnimation(dt);
+		trackSystem.update(dt, position, rotation);
 	}
 
 	void BaseTank::spawn(float xPos, float yPos) {
 		position = { xPos, yPos };
-		DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
+		trackSystem.prevPositionForTracks = position;
+		trackSystem.totalDistanceTravelled = 0.0f;
 	}
-
+	/* ----------------------------------  Base Tank Texture loading   ---------------------------------- */
 	void BaseTank::loadTexture(const std::string& tank_name) {
 		name = tank_name;
 		if (texture.id == 0) {
@@ -35,17 +45,18 @@ namespace Engine {
 
 			bodyRect = { 0, 0, (float)halfWidth, (float)height };
 			turretRect = { (float)halfWidth, 0, (float)halfWidth, (float)height };
+			trackSystem.loadTrackTexture("tank_track");
 		}
 	}
 
-	// load turret fire animation files
+	/* ----------------------------------  Base Tank Fire animation loading  ---------------------------------- */
 	void BaseTank::loadFireAnimation() {
 		AnimationSeq fire_animation = get_animation_seq("tank_turret_fire");
 		fireFrames = fire_animation.animations;
 		fireFrameCount = fire_animation.frame_counts;
 		fireTimer = 0.2f;
 	}
-
+	/* ----------------------------------  Base Tank Updating Fire animation   ---------------------------------- */
 	void BaseTank::updateFireAnimation(float dt) {
 		if (!isFiring || fireFrames.empty()) return;
 		fireTimer += dt;
@@ -60,11 +71,13 @@ namespace Engine {
 		}
 	}
 
+
+	/* ----------------------------------  Base Tank draw  ---------------------------------- */
 	void BaseTank::draw() {
 		// for debug animation
 		//DrawText(TextFormat("Firing frame: %d/%d", currentFireFrame, fireFrameCount), 10, 10, 20, RED);
 		//DrawText(TextFormat("Firing: %d/%d", isFiring, fireFrameCount), 30, 30, 20, RED);
-
+		trackSystem.draw();
 		/* ----------------------------------  Tank Body and Turret Drawing  ---------------------------------- */
 		DrawTexturePro(
 			texture,
@@ -82,6 +95,9 @@ namespace Engine {
 			turretRotation,
 			WHITE
 		);
+		
+		
+
 		/* ----------------------------------  Turret Shot Animation  ---------------------------------- */
 		if (isFiring && currentFireFrame < fireFrameCount) {
 			Texture2D& fireTex = fireFrames[currentFireFrame];
@@ -103,13 +119,13 @@ namespace Engine {
 		}
 		/* ----------------------------------  Tank Range Indicator  ---------------------------------- */
 		Color rangeColor = Color{ 255, 0, 0, 50 }; // Red, transparent
-		DrawCircleLines((int)position.x, (int)position.y, (float)range , rangeColor);
+		DrawCircleLines((int)position.x, (int)position.y, (float)range, rangeColor);
 
 		// Calculate range dot using turret logic
 		float rad = DEG2RAD * turretRotation;
 		Vector2 rangeOffset = {
-			0.0f * cosf(rad) - (range) * sinf(rad),  // X offset
-			0.0f * sinf(rad) + (range) * cosf(rad)   // Y offset
+			0.0f * cosf(rad) - (range)*sinf(rad),  // X offset
+			0.0f * sinf(rad) + (range)*cosf(rad)   // Y offset
 		};
 
 		// Position of the dot at max range
@@ -117,6 +133,8 @@ namespace Engine {
 			position.x + rangeOffset.x,
 			position.y + rangeOffset.y
 		};
+		// set turret target position so later we know where to BOOM!
+		turret_target_position = rangeDot;
 
 		DrawCircleV(rangeDot, 4.0f, RED);
 	}
