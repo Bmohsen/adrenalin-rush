@@ -3,7 +3,10 @@
 #include <string>
 #include "base.h" 
 #include "animation/tank_tire_system.h"
+#include "animation/ExplostionSystem.h"
 #include <vector>
+
+using namespace Engine::Animation;
 
 namespace Engine {
 
@@ -67,6 +70,7 @@ namespace Engine {
 		int kills = 0;
 
 		TankTireSystem trackSystem;
+		ExplostionSystem explosionSystem;
 		Vector2 position{ 0, 0 };
 		Vector2 turret_target_position{ 0, 0 };
 		Texture2D texture{};

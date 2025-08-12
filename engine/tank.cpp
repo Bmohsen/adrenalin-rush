@@ -95,8 +95,6 @@ namespace Engine {
 			turretRotation,
 			WHITE
 		);
-		
-		
 
 		/* ----------------------------------  Turret Shot Animation  ---------------------------------- */
 		if (isFiring && currentFireFrame < fireFrameCount) {

@@ -48,6 +48,7 @@ void login_screen(){}
 void init_basics() {
     std::string game_icon_path = get_asset("game_icon", AssetType::IMAGE);
     Image game_icon = LoadImage(game_icon_path.c_str());
+    SetConfigFlags(FLAG_MSAA_4X_HINT);
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "AD Rush");
     SetWindowIcon(game_icon);
     SetTargetFPS(60);

@@ -4,7 +4,6 @@
 #include <string>
 
 namespace Engine {
-	// A single track imprint
 	struct TankTrackStamp {
 		Vector2 pos;
 		float rotation = 0.0f;
@@ -15,7 +14,6 @@ namespace Engine {
 	};
 
 	struct TankTireSystem {
-		// Visuals
 		Texture2D trackTexture{};                // Tire track image
 		std::vector<TankTrackStamp> tireTracks;  // Active stamps
 		float distSinceLastStamp = 0.0f;
@@ -33,10 +31,8 @@ namespace Engine {
 		float totalDistanceTravelled = 0.0f; // accumulate traveled distance
 		Vector2 prevPositionForTracks{ 0, 0 }; // used to compute traveled delta
 
-		// Limits
 		size_t maxTrackCount = 500;          // safety cap
 
-		// Methods
 		Vector2 getWheelWorldPos(const Vector2& tankPos, float rotationDeg, const Vector2& wheelLocalOffset);
 		void loadTrackTexture(const std::string& assetName);
 		void addTrackStamp(const Vector2& worldPos, float rotation);
