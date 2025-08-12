@@ -36,13 +36,16 @@
     <ClCompile Include="engine\player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="engine\tank_tire_system.cpp">
+    <ClCompile Include="engine\animation\tank_tire_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\world_generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="engine\WorldMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\animation\ExplostionSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\WorldMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\animation\ExplostionSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

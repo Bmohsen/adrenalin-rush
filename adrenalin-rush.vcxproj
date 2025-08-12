@@ -131,17 +131,19 @@
     <ClCompile Include="engine\LevelManager.cpp" />
     <ClCompile Include="engine\player.cpp" />
     <ClCompile Include="engine\tank.cpp" />
-    <ClCompile Include="engine\tank_tire_system.cpp" />
+    <ClCompile Include="engine\animation\tank_tire_system.cpp" />
     <ClCompile Include="engine\tower.cpp" />
     <ClCompile Include="engine\utils.cpp" />
     <ClCompile Include="engine\world_generator.cpp" />
     <ClCompile Include="engine\WorldMap.cpp" />
+    <ClCompile Include="engine\animation\ExplostionSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\base.h" />
+    <ClInclude Include="engine\animation\ExplostionSystem.h" />
     <ClInclude Include="missions\mission.h" />
     <ClInclude Include="engine\Player.h" />
     <ClInclude Include="resource1.h" />
