@@ -46,6 +46,7 @@ namespace Engine {
 			bodyRect = { 0, 0, (float)halfWidth, (float)height };
 			turretRect = { (float)halfWidth, 0, (float)halfWidth, (float)height };
 			trackSystem.loadTrackTexture("tank_track");
+			explosionSystem.loadTexture("tank_fire_expo01");
 		}
 	}
 

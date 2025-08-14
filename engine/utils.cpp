@@ -3,8 +3,10 @@
 #include <vector>
 
 using namespace std;
-namespace fs = filesystem;
+namespace fs = std::filesystem;
+
 namespace Engine {
+
 	// Return the first asset file path that contains `name` in its filename
 	// Minimal Resource getter for Adernalin rush game.
 	string get_asset(const string& name, const AssetType& asset_type) {
