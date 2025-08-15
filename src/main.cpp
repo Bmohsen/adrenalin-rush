@@ -2,8 +2,7 @@
 //
 
 #include "engine/base.hpp"
-#include "engine/tank.hpp"
-#include "engine/Player.hpp"
+#include "engine/demo.hpp"
 #include <vector>
 
 using namespace Engine;
@@ -24,22 +23,15 @@ int main()
 void game_loop()
 {
 
-    BaseTank *lightTank = new LightTank();
-    // init tank state
-    lightTank->loadTexture("m6");
-    lightTank->spawn(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.7);
-    Player *player = new Player(lightTank);
+    init_demo();
     while (!WindowShouldClose())
     {
         float dt = GetFrameTime();
-        player->updateControl(dt);
         ClearBackground(WHITE);
-        BeginDrawing();
-        player->draw();
+        game_demo(dt);
         EndDrawing();
     }
-    // Cleanup tanks and textures
-    delete player;
+
     CloseWindow();
 }
 

@@ -14,19 +14,23 @@ namespace Engine
 		return sqrtf(dx * dx + dy * dy);
 	};
 	/* ----------------------------------  Base Tank   ---------------------------------- */
-	BaseTank::BaseTank()
+	BaseTank::BaseTank(const std::string &tank_name)
 	{
 		// load turret shout
 		std::string soundPath = get_asset("tank-shot", AssetType::SOUND);
 		tankFireSound = LoadSound(soundPath.c_str());
 		loadFireAnimation();
+		loadTexture(tank_name);
 	}
 	/* ----------------------------------  Base Tank Destructor   ---------------------------------- */
 	BaseTank::~BaseTank()
 	{
-		UnloadTexture(texture);
-		UnloadSound(tankFireSound);
-		UnloadTexture(trackSystem.trackTexture);
+		if (texture.id != 0)
+			UnloadTexture(texture);
+		if (tankFireSound.frameCount > 0)
+			UnloadSound(tankFireSound);
+		if (trackSystem.trackTexture.id != 0)
+			UnloadTexture(trackSystem.trackTexture);
 	}
 	/* ----------------------------------  Base Tank Update  ---------------------------------- */
 	void BaseTank::updateControl(float dt)
@@ -153,7 +157,7 @@ namespace Engine
 	}
 
 	/* ----------------------------------  LightTank  ---------------------------------- */
-	LightTank::LightTank()
+	LightTank::LightTank() : BaseTank("m6")
 	{
 		name = "Light Tank";
 		tank_class = TankClass::LIGHT;

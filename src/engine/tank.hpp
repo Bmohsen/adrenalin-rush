@@ -31,7 +31,6 @@ namespace Engine
 		DESTROYER,
 	};
 
-
 	/* ----------------------------------  Base Tank defination  ---------------------------------- */
 	/*
 		TODO: Tank take damage, tank damaged texture, show text of the hit
@@ -39,7 +38,7 @@ namespace Engine
 	class BaseTank
 	{
 	public:
-		BaseTank();
+		BaseTank(const std::string &tank_name = "m6");
 		virtual ~BaseTank();
 		virtual void updateControl(float dt);
 		virtual void attack() = 0;
