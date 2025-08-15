@@ -1,0 +1,51 @@
+# CMake build folders
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/Makefile
+/*.cmake
+/*.cbp
+/*.sublime-project
+/*.sublime-workspace
+
+# Visual Studio files
+*.vcxproj*
+*.sln
+*.user
+*.ipch
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VC.opendb
+
+# MinGW / GCC / object files
+*.o
+*.obj
+*.exe
+*.dll
+*.a
+*.lib
+*.pch
+*.pdb
+
+# Debug / Release folders
+/Debug/
+/Release/
+
+# Generated files
+*.log
+*.tmp
+*.out
+
+# IDE / editor specific
+*.swp
+*.DS_Store
+.idea/
+.vscode/
+
+# NuGet packages
+packages/
+
+# Raylib specific (if downloaded)
+raylib/build/
+raylib/bin/
