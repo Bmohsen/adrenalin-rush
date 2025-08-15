@@ -45,6 +45,11 @@ void game_demo(float dt)
     for (auto t : npcTanks)
     {
         t->draw();
+        // --- Draw All Explosions Globally on Top ---
+        for (auto *sys : Engine::Animation::ExplostionSystem::global_explosions)
+        {
+            sys->draw();
+        }
     }
     EndMode2D();
 }

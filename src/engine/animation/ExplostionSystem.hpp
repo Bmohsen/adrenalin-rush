@@ -6,6 +6,7 @@ namespace Engine
 {
     namespace Animation
     {
+
         enum class AnimationSpiritFMT
         {
             _64GRID,
@@ -24,9 +25,10 @@ namespace Engine
             void start(const Vector2 &pos, bool loopAnim = false);
             void update(float dt);
             void draw() const;
-            float scale{1.0f};
+            float scale{0.8f};
             float frameTime{0.01f};
             Sound explostionSound{};
+            static std::vector<ExplostionSystem *> global_explosions;
 
         private:
             struct ExplosionInstance

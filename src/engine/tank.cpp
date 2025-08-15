@@ -52,6 +52,7 @@ namespace Engine
 		name = tank_name;
 		if (texture.id == 0)
 		{
+			explosionSystem.loadTexture("tank_fire_expo01", AnimationSpiritFMT::_64GRID);
 			texture = LoadTexture(get_asset(name).c_str());
 			// Split the texture into body (left half) and turret (right half)
 			int halfWidth = texture.width / 2;
@@ -60,7 +61,6 @@ namespace Engine
 			bodyRect = {0, 0, (float)halfWidth, (float)height};
 			turretRect = {(float)halfWidth, 0, (float)halfWidth, (float)height};
 			trackSystem.loadTrackTexture("tank_track");
-			explosionSystem.loadTexture("tank_fire_expo01", AnimationSpiritFMT::_64GRID);
 		}
 	}
 
@@ -115,8 +115,8 @@ namespace Engine
 			WHITE);
 
 		/* ----------------------------------  Tank Range Indicator  ---------------------------------- */
-		Color rangeColor = Color{255, 0, 0, 50}; // Red, transparent
-		DrawCircleLines((int)position.x, (int)position.y, (float)range, rangeColor);
+		// Color rangeColor = Color{255, 0, 0, 50}; // Red, transparent
+		// DrawCircleLines((int)position.x, (int)position.y, (float)range, rangeColor);
 
 		// Calculate range dot using turret logic
 		float rad = DEG2RAD * turretRotation;
@@ -153,7 +153,7 @@ namespace Engine
 			Vector2 origin = {fireTex.width / 2.0f, fireTex.height + 150.0f};
 			DrawTexturePro(fireTex, sourceRec, destRec, origin, turretRotation + 180.0f, WHITE);
 		}
-		explosionSystem.draw();
+		// explosionSystem.draw();
 	}
 
 	/* ----------------------------------  LightTank  ---------------------------------- */
@@ -185,7 +185,6 @@ namespace Engine
 			currentFireFrame = 0;
 			fireTimer = 0.0f;		  // start counting fresh
 			PlaySound(tankFireSound); // plays only once per shot
-
 			explosionSystem.start(turret_target_position, false);
 		}
 	}
