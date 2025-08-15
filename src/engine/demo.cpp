@@ -1,6 +1,6 @@
 // demo.cpp
-#include "tank.hpp"
-#include "player.hpp"
+#include "objects/tank.hpp"
+#include "objects/player.hpp"
 #include "demo.hpp"
 #include <vector>
 

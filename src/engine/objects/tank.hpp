@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include "base.hpp"
-#include "animation/tank_tire_system.hpp"
-#include "animation/ExplostionSystem.hpp"
+#include "../base.hpp"
+#include "../animation/tank_tire_system.hpp"
+#include "../animation/ExplostionSystem.hpp"
 #include <vector>
 
 using namespace Engine::Animation;
@@ -34,6 +34,21 @@ namespace Engine
 	/* ----------------------------------  Base Tank defination  ---------------------------------- */
 	/*
 		TODO: Tank take damage, tank damaged texture, show text of the hit
+		These are features that could be encapsulated separately for cleaner design:
+
+		TurretSystem – handles turret rotation, aiming logic, and target tracking.
+
+		AmmoSystem – manages ammo count, reloading, different ammo types.
+
+		HealthSystem – tracks health, damage, and destruction effects.
+
+		MovementSystem – could separate raw position/velocity/rotation updates from the tank class.
+
+		AIController – for NPC tanks, encapsulating decision-making, pathfinding, targeting.
+
+		WeaponSystem – for firing projectiles, calculating damage, cooldowns.
+
+		UIIndicatorSystem – optional, handles range circles, hit markers, or HUD elements attached to the tank.
 	*/
 	class BaseTank
 	{

@@ -1,6 +1,6 @@
-#include "base.hpp"
+#include "../base.hpp"
 #include "tank.hpp"
-#include "animation/Animation.hpp"
+#include "../animation/Animation.hpp"
 
 using namespace Engine::Animation;
 

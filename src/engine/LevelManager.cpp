@@ -1,5 +1,5 @@
 #include "base.hpp"
-#include "tank.hpp"
+#include "objects/tank.hpp"
 
 namespace Engine
 {
